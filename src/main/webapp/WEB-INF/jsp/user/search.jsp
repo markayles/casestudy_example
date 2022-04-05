@@ -4,6 +4,12 @@
 
 <h1>Search</h1>
 
+<form action="/user/search" method="GET">
+    <label for="searchFirstName">First Name: </label>
+    <input type="text" name="searchFirstName" id="searchFirstName">
+    <button type="submit">Search</button> ${test}
+</form>
+
 <table class="table">
     <tr>
         <th>Email</th>
@@ -11,7 +17,7 @@
         <th>Last Name</th>
     </tr>
     <c:forEach items="${users}" var="user">
-        <tr scope=""row>
+        <tr scope="row">
             <td>${user.email}</td>
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>

@@ -11,8 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 import teksystems.casestudy.database.dao.UserDAO;
 import teksystems.casestudy.database.entity.User;
 import teksystems.casestudy.formbean.RegisterFormBean;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -95,12 +97,30 @@ public class UserController {
         return response;
     }
 
+    // ---create a form on the user search page that action submits to this route using a get method
+    // ---make an input box for the user to enter a search term for first name
+    // ---add a @RequestParam to take in a search value from the input box - use required = false in the annotation
+    // ---use the search value in the query
+    // ---add the search value to the model and make it display in the input box when the page reloads
+    // ---add error checking to make sure that the incoming search value is not null and is not empty.
+    // ---find apache string utils on maven central and add it to your pom file - very high recommendation
+    // ---research the StringUtils.isEmpty function and use for error checking
     @GetMapping("/user/search")
-    public ModelAndView search() {
+    public ModelAndView search(@RequestParam(value = "searchFirstName", required = false) String searchFirstName) {
         ModelAndView response = new ModelAndView();
         response.setViewName("user/search");
 
-        List<User> users = userDao.findByFirstNameIgnoreCaseContaining("e");
+        log.error("Searched for: " + searchFirstName);
+        List<User> users = new ArrayList<>();
+
+        // we dont want to show an error if the request is null, which indicates the first load of the page
+        if(searchFirstName != null){
+            if(!StringUtils.isEmpty(searchFirstName)){
+                users = userDao.findByFirstNameIgnoreCaseContaining(searchFirstName);
+            }else{
+                response.addObject("searchError", "You cannot have an empty search");
+            }
+        }
 
         response.addObject("users", users);
 
