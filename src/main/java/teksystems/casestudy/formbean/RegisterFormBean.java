@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class RegisterFormBean {
+    private Integer id;
     private String email;
     private String firstName;
     private String lastName;
