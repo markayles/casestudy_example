@@ -15,6 +15,7 @@
 
 <div class="container">
 
-<a href="/index">Index</a> |
-<a href="/user/register">Register</a>
-<hr>
+    <a href="/index">Index</a> |
+    <a href="/user/register">Register</a> |
+    <a href="/user/search">Search</a>
+    <hr>

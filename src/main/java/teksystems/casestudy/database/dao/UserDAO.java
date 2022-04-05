@@ -16,6 +16,8 @@ public interface UserDAO extends JpaRepository<User, Long> {
 
     public List<User> findByFirstName(@Param("firstName") String firstName);
 
+    public List<User> findByFirstNameIgnoreCaseContaining(@Param("firstName") String firstName);
+
     public List<User> findByFirstNameAndLastName(@Param("firstName") String firstName, @Param("lastName") String lastName);
 
     @Query("select u from User u where u.password = :password")
