@@ -5,9 +5,20 @@
 <h1>Search</h1>
 
 <form action="/user/search" method="GET">
-    <label for="searchFirstName">First Name: </label>
-    <input type="text" name="searchFirstName" id="searchFirstName">
-    <button type="submit">Search</button> ${test}
+    <div class="row">
+        <div class="alert alert-danger" role="alert" id="errorBox">
+            ${searchError}
+        </div>
+    </div>
+    <div class="row">
+        <label for="searchFirstName" class="col-1 col-form-label" >First Name: </label>
+        <div class="col-3">
+            <input type="text" class="form-control" name="searchFirstName" id="searchFirstName" value="${searchTerm}">
+        </div>
+        <div class="col-1">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
 </form>
 
 <table class="table">
@@ -25,5 +36,13 @@
     </c:forEach>
 </table>
 
+<script>
+    let errorMessage = "${searchError}";
+    let errorBox = $('#errorBox');
+
+    if(errorMessage == ""){
+        errorBox.hide();
+    }
+</script>
 
 <jsp:include page="../include/footer.jsp"/>

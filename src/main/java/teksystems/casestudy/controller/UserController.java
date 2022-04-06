@@ -123,6 +123,7 @@ public class UserController {
         }
 
         response.addObject("users", users);
+        response.addObject("searchTerm", searchFirstName);
 
         return response;
     }
